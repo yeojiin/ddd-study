@@ -2,19 +2,18 @@ package com.yeojiin.ddd.study.domain;
 
 import com.yeojiin.ddd.study.constant.OrderState;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.yeojiin.ddd.study.constant.Message.AT_LEAST_ONE_ORDER_LINE;
 import static com.yeojiin.ddd.study.constant.Message.SHIPPING_INFO_IS_NOT_EMPTY;
 
 public class Order {
-    private List<OrderLine> orderLines;
+    private OrderLines orderLines;
     private ShippingInfo shippingInfo;
     private Money totalAmounts;
     private OrderState orderState;
 
-    public Order(List<OrderLine> orderLines, ShippingInfo shippingInfo, OrderState orderState) {
+    public Order(OrderLines orderLines, ShippingInfo shippingInfo, OrderState orderState) {
         verifyOrderLines(orderLines);
         verifyShippingInfo(shippingInfo);
         calculateTotalAmounts();
@@ -22,27 +21,24 @@ public class Order {
     }
 
     public static Order of(List<OrderLine> orderLines, ShippingInfo shippingInfo, OrderState orderState) {
-        return new Order(orderLines, shippingInfo, orderState);
+        return new Order(OrderLines.from(orderLines), shippingInfo, orderState);
     }
     public List<OrderLine> getOrderLines() {
-        return orderLines;
+        return orderLines.getOrderLines();
     }
 
     public Money getTotalAmounts() {
         return totalAmounts;
     }
 
-    private void verifyOrderLines(List<OrderLine> orderLines) {
+    private void verifyOrderLines(OrderLines orderLines) {
         verifyAtLeastOneOrMoreOrderLines(orderLines);
         this.orderLines = orderLines;
     }
     public void calculateTotalAmounts() {
-        int totalAmounts = orderLines.stream()
-                .mapToInt(o -> o.getAmounts())
-                .sum();
-        this.totalAmounts = new Money(totalAmounts);
+        this.totalAmounts = new Money(orderLines.getTotalAmounts());
     }
-    private void verifyAtLeastOneOrMoreOrderLines(List<OrderLine> orderLines) {
+    private void verifyAtLeastOneOrMoreOrderLines(OrderLines orderLines) {
         if(orderLines == null || orderLines.isEmpty()) {
             throw new IllegalArgumentException(AT_LEAST_ONE_ORDER_LINE);
         }

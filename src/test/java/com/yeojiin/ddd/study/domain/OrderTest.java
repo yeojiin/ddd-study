@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.yeojiin.ddd.study.constant.Message.ADDRESS_IS_NOT_EMPTY;
 import static com.yeojiin.ddd.study.constant.Message.AT_LEAST_ONE_ORDER_LINE;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
