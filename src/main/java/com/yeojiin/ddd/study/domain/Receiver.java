@@ -7,8 +7,13 @@ public class Receiver {
     private String phoneNumber;
 
     public Receiver(String name, String phoneNumber) {
+
         this.name = name;
         this.phoneNumber = phoneNumber;
+    }
+
+    public static Receiver of(String name, String phoneNumber) {
+        return new Receiver(name, phoneNumber);
     }
 
     @Override

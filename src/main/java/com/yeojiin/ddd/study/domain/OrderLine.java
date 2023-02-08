@@ -19,6 +19,10 @@ public class OrderLine {
         return new OrderLine(product, price,quantity);
     }
 
+    public int getAmounts() {
+        return this.amounts;
+    }
+
     private int calculateAmounts() {
         return price * quantity;
     }
@@ -46,7 +50,5 @@ public class OrderLine {
                 '}';
     }
 
-    public int getAmounts() {
-        return this.amounts;
-    }
+
 }
