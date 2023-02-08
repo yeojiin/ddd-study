@@ -2,6 +2,8 @@ package com.yeojiin.ddd.study.domain;
 
 import java.util.Objects;
 
+import static com.yeojiin.ddd.study.constant.Message.INVALID_UNDER_ZERO;
+
 public class OrderLine {
     private Product product;
     private int price;
@@ -10,9 +12,16 @@ public class OrderLine {
 
     public OrderLine(Product product, int price, int quantity) {
         this.product = product;
-        this.price = price;
+        verifyPrice(price);
         this.quantity = quantity;
         this.amounts = calculateAmounts();
+    }
+
+    private void verifyPrice(int price) {
+        if(price <= 0) {
+            throw new IllegalArgumentException(INVALID_UNDER_ZERO);
+        }
+        this.price = price;
     }
 
     public static OrderLine of(Product product, int price, int quantity) {

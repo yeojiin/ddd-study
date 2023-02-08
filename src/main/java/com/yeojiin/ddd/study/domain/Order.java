@@ -4,6 +4,9 @@ import com.yeojiin.ddd.study.constant.OrderState;
 
 import java.util.List;
 
+import static com.yeojiin.ddd.study.constant.Message.AT_LEAST_ONE_ORDER_LINE;
+import static com.yeojiin.ddd.study.constant.Message.SHIPPING_INFO_IS_NOT_EMPTY;
+
 public class Order {
     private List<OrderLine> orderLines;
     private ShippingInfo shippingInfo;
@@ -29,7 +32,7 @@ public class Order {
     }
     private void verifyAtLeastOneOrMoreOrderLines(List<OrderLine> orderLines) {
         if(orderLines == null || orderLines.isEmpty()) {
-            throw new IllegalArgumentException("최소 한 종류 이상의 상품을 주문해야 합니다");
+            throw new IllegalArgumentException(AT_LEAST_ONE_ORDER_LINE);
         }
     }
 
@@ -40,7 +43,7 @@ public class Order {
 
     private void verifyShippingInfoIsNotEmpty(ShippingInfo shippingInfo) {
         if(shippingInfo == null) {
-            throw new IllegalArgumentException("배송지 정보는 필수값 입니다.");
+            throw new IllegalArgumentException(SHIPPING_INFO_IS_NOT_EMPTY);
         }
     }
 
