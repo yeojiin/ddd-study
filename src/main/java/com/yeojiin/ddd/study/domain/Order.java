@@ -10,4 +10,40 @@ public class Order {
     private int totalAmounts;
     private OrderState orderState;
 
+    public Order(List<OrderLine> orderLines, ShippingInfo shippingInfo, int totalAmounts, OrderState orderState) {
+        verifyOrderLines(orderLines);
+        verifyShippingInfo(shippingInfo);
+        calculateTotalAmounts();
+        this.orderState = orderState;
+    }
+
+    private void verifyOrderLines(List<OrderLine> orderLines) {
+        verifyAtLeastOneOrMoreOrderLines(orderLines);
+        this.orderLines = orderLines;
+    }
+    public void calculateTotalAmounts() {
+        this.totalAmounts = orderLines.stream()
+                .mapToInt(o -> o.getAmounts())
+                .sum();
+    }
+    private void verifyAtLeastOneOrMoreOrderLines(List<OrderLine> orderLines) {
+        if(orderLines == null || orderLines.isEmpty()) {
+            throw new IllegalArgumentException("최소 한 종류 이상의 상품을 주문해야 합니다");
+        }
+    }
+
+    private void verifyShippingInfo(ShippingInfo shippingInfo) {
+        verifyShippingInfoIsNotEmpty(shippingInfo);
+        this.shippingInfo = shippingInfo;
+    }
+
+    private void verifyShippingInfoIsNotEmpty(ShippingInfo shippingInfo) {
+        if(shippingInfo == null) {
+            throw new IllegalArgumentException("배송지 정보는 필수값 입니다.");
+        }
+    }
+
+
+
+
 }

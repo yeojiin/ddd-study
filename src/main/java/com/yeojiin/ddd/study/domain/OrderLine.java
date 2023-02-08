@@ -41,4 +41,8 @@ public class OrderLine {
                 ", amounts=" + amounts +
                 '}';
     }
+
+    public int getAmounts() {
+        return this.amounts;
+    }
 }
