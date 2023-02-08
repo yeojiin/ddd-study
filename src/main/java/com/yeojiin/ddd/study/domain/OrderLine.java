@@ -12,7 +12,11 @@ public class OrderLine {
         this.product = product;
         this.price = price;
         this.quantity = quantity;
-        this.amounts = amounts;
+        this.amounts = calculateAmounts();
+    }
+
+    private int calculateAmounts() {
+        return price * quantity;
     }
 
     @Override
