@@ -8,6 +8,25 @@ public class Address {
     private String address3;
 
     public Address(String address1, String address2, String address3) {
+        verifyAddress(address1, address2, address3);
+    }
+
+    public static Address of(String address1, String address2, String address3) {
+        return new Address(address1, address2, address3);
+    }
+
+    private void verifyAddress(String address1, String address2, String address3) {
+        if(address1 == null || address1.isBlank()) {
+            throw new IllegalArgumentException("주소는 필수값 입니다.");
+        }
+
+        if(address2 == null || address2.isBlank()) {
+            throw new IllegalArgumentException("주소는 필수값 입니다.");
+        }
+
+        if(address3 == null || address3.isBlank()) {
+            throw new IllegalArgumentException("주소는 필수값 입니다.");
+        }
         this.address1 = address1;
         this.address2 = address2;
         this.address3 = address3;
