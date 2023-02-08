@@ -7,7 +7,7 @@ import java.util.List;
 public class Order {
     private List<OrderLine> orderLines;
     private ShippingInfo shippingInfo;
-    private int totalAmounts;
+    private Money totalAmounts;
     private OrderState orderState;
 
     public Order(List<OrderLine> orderLines, ShippingInfo shippingInfo, int totalAmounts, OrderState orderState) {
@@ -22,9 +22,10 @@ public class Order {
         this.orderLines = orderLines;
     }
     public void calculateTotalAmounts() {
-        this.totalAmounts = orderLines.stream()
+        int totalAmounts = orderLines.stream()
                 .mapToInt(o -> o.getAmounts())
                 .sum();
+        this.totalAmounts = new Money(totalAmounts);
     }
     private void verifyAtLeastOneOrMoreOrderLines(List<OrderLine> orderLines) {
         if(orderLines == null || orderLines.isEmpty()) {

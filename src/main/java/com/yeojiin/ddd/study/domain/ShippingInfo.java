@@ -9,4 +9,5 @@ public class ShippingInfo {
         this.receiver = receiver;
         this.address = address;
     }
+
 }
