@@ -2,6 +2,7 @@ package com.yeojiin.ddd.study.domain;
 
 import com.yeojiin.ddd.study.constant.OrderState;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.yeojiin.ddd.study.constant.Message.AT_LEAST_ONE_ORDER_LINE;
@@ -13,11 +14,22 @@ public class Order {
     private Money totalAmounts;
     private OrderState orderState;
 
-    public Order(List<OrderLine> orderLines, ShippingInfo shippingInfo, int totalAmounts, OrderState orderState) {
+    public Order(List<OrderLine> orderLines, ShippingInfo shippingInfo, OrderState orderState) {
         verifyOrderLines(orderLines);
         verifyShippingInfo(shippingInfo);
         calculateTotalAmounts();
         this.orderState = orderState;
+    }
+
+    public static Order of(List<OrderLine> orderLines, ShippingInfo shippingInfo, OrderState orderState) {
+        return new Order(orderLines, shippingInfo, orderState);
+    }
+    public List<OrderLine> getOrderLines() {
+        return orderLines;
+    }
+
+    public Money getTotalAmounts() {
+        return totalAmounts;
     }
 
     private void verifyOrderLines(List<OrderLine> orderLines) {
@@ -46,8 +58,6 @@ public class Order {
             throw new IllegalArgumentException(SHIPPING_INFO_IS_NOT_EMPTY);
         }
     }
-
-
 
 
 }

@@ -6,5 +6,15 @@ public class Money {
         this.value = value;
     }
 
+    public static Money from(int value) {
+        return new Money(value);
+    }
+
+    public Money add(int addValue) {
+        return Money.from(value + addValue);
+    }
+
+
+
 
 }

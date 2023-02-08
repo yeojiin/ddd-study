@@ -10,4 +10,7 @@ public class ShippingInfo {
         this.address = address;
     }
 
+    public static ShippingInfo of(Receiver receiver, Address address) {
+        return new ShippingInfo(receiver, address);
+    }
 }
