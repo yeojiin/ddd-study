@@ -2,6 +2,9 @@ package com.yeojiin.ddd.study.domain;
 
 import java.util.Objects;
 
+import static com.yeojiin.ddd.study.constant.Message.NAME_IS_NOT_EMPTY;
+import static com.yeojiin.ddd.study.constant.Message.PHONE_NUMBER_IS_NOT_EMPTY;
+
 public class Receiver {
     private String name;
     private String phoneNumber;
@@ -13,14 +16,14 @@ public class Receiver {
 
     private void verifyPhoneNumber(String phoneNumber) {
         if(phoneNumber == null || phoneNumber.isBlank()) {
-            throw new IllegalArgumentException("휴대폰 번호는 필수값 입니다.");
+            throw new IllegalArgumentException(PHONE_NUMBER_IS_NOT_EMPTY);
         }
         this.phoneNumber = phoneNumber;
     }
 
     private void verifyReciverName(String name) {
         if(name == null || name.isBlank()) {
-            throw new IllegalArgumentException("이름은 필수값 입니다.");
+            throw new IllegalArgumentException(NAME_IS_NOT_EMPTY);
         }
         this.name = name;
     }

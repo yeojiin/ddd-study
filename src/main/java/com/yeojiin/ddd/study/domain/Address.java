@@ -2,6 +2,8 @@ package com.yeojiin.ddd.study.domain;
 
 import java.util.Objects;
 
+import static com.yeojiin.ddd.study.constant.Message.ADDRESS_IS_NOT_EMPTY;
+
 public class Address {
     private String address1;
     private String address2;
@@ -17,15 +19,15 @@ public class Address {
 
     private void verifyAddress(String address1, String address2, String address3) {
         if(address1 == null || address1.isBlank()) {
-            throw new IllegalArgumentException("주소는 필수값 입니다.");
+            throw new IllegalArgumentException(ADDRESS_IS_NOT_EMPTY);
         }
 
         if(address2 == null || address2.isBlank()) {
-            throw new IllegalArgumentException("주소는 필수값 입니다.");
+            throw new IllegalArgumentException(ADDRESS_IS_NOT_EMPTY);
         }
 
         if(address3 == null || address3.isBlank()) {
-            throw new IllegalArgumentException("주소는 필수값 입니다.");
+            throw new IllegalArgumentException(ADDRESS_IS_NOT_EMPTY);
         }
         this.address1 = address1;
         this.address2 = address2;

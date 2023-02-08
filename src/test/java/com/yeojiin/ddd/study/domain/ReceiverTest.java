@@ -4,6 +4,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static com.yeojiin.ddd.study.constant.Message.NAME_IS_NOT_EMPTY;
+import static com.yeojiin.ddd.study.constant.Message.PHONE_NUMBER_IS_NOT_EMPTY;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 @DisplayName("주문자 테스트")
@@ -34,10 +36,10 @@ public class ReceiverTest {
         assertAll(
                 () -> Assertions.assertThatThrownBy(() -> Receiver.of("", "01012345678"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("이름은 필수값 입니다."),
+                        .hasMessage(NAME_IS_NOT_EMPTY),
                 () -> Assertions.assertThatThrownBy(() -> Receiver.of(null, "01012345678"))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("이름은 필수값 입니다.")
+                        .hasMessage(NAME_IS_NOT_EMPTY)
         );
     }
 
@@ -48,10 +50,10 @@ public class ReceiverTest {
         assertAll(
                 () -> Assertions.assertThatThrownBy(() -> Receiver.of("yeojiin", ""))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("휴대폰 번호는 필수값 입니다."),
+                        .hasMessage(PHONE_NUMBER_IS_NOT_EMPTY),
                 () -> Assertions.assertThatThrownBy(() -> Receiver.of("yeojiin", null))
                         .isInstanceOf(IllegalArgumentException.class)
-                        .hasMessage("휴대폰 번호는 필수값 입니다.")
+                        .hasMessage(PHONE_NUMBER_IS_NOT_EMPTY)
         );
     }
 }
