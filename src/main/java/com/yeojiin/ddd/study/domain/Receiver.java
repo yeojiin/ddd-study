@@ -7,9 +7,22 @@ public class Receiver {
     private String phoneNumber;
 
     public Receiver(String name, String phoneNumber) {
+        verifyReciverName(name);
+        verifyPhoneNumber(phoneNumber);
+    }
 
-        this.name = name;
+    private void verifyPhoneNumber(String phoneNumber) {
+        if(phoneNumber == null || phoneNumber.isBlank()) {
+            throw new IllegalArgumentException("휴대폰 번호는 필수값 입니다.");
+        }
         this.phoneNumber = phoneNumber;
+    }
+
+    private void verifyReciverName(String name) {
+        if(name == null || name.isBlank()) {
+            throw new IllegalArgumentException("이름은 필수값 입니다.");
+        }
+        this.name = name;
     }
 
     public static Receiver of(String name, String phoneNumber) {
